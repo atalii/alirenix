@@ -6,6 +6,11 @@
       let
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
       in with pkgs; {
+        helloworld = import ./helloworld {
+          inherit pkgs;
+          alire = self.packages.x86_64-linux.alire;
+        };
+
         alire = stdenv.mkDerivation (finalAttrs: {
           pname = "alire";
           version = "2.1.0-dev";
