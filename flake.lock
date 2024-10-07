@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "alire-community-index": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1728290080,
+        "narHash": "sha256-eUnXtuU7pj2oSKOZfXHEw4D53ImnDpBcC0FkwwwBTGk=",
+        "owner": "alire-project",
+        "repo": "alire-index",
+        "rev": "094bc572e30cde7dfd589f39e885ad293ec4ab44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alire-project",
+        "repo": "alire-index",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1727816908,
@@ -17,6 +33,7 @@
     },
     "root": {
       "inputs": {
+        "alire-community-index": "alire-community-index",
         "nixpkgs": "nixpkgs"
       }
     }
