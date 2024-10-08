@@ -11,9 +11,17 @@
       let
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
       in with pkgs; {
+        indexes.community = self.lib.indexDerivation {
+            inherit pkgs;
+            idxSrc = alire-community-index;
+            pname = "community";
+            version = "stable-1.3.0";
+        };
+
         helloworld = import ./helloworld {
-          inherit pkgs alire-community-index;
+          inherit pkgs;
           alire = self.packages.x86_64-linux.alire;
+          index = self.packages.x86_64-linux.indexes.community;
         };
 
         alire = stdenv.mkDerivation (finalAttrs: {
@@ -51,5 +59,7 @@
           '';
         });
       };
+
+    lib = import ./lib;
   };
 }
