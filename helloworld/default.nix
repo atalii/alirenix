@@ -9,16 +9,16 @@ with pkgs; stdenv.mkDerivation {
   # TODO: is configurePhase correct here?
   configurePhase = ''
     mkdir -p /tmp/.config/
-    cp -r ${index} /tmp/.config/alire/
 
-    chmod +w -R /tmp/.config # why isn't it created writable?!
+    cp -r ${index} /tmp/.config/alire/
+    chmod +w -R /tmp/.config # why isn't it created writable??
     alr settings --set index.auto_update 0
     alr settings --set toolcahin.assisstant false
-    alr --force -v toolchain --select gnat_external
+    alr toolchain --select gnat_external
   '';
 
   buildPhase = ''
-    alr --force -n build
+    alr -n build
   '';
 
   installPhase = ''
