@@ -1,4 +1,8 @@
 result
+/withdeps/obj/
+/withdeps/bin/
+/withdeps/alire/
+/withdeps/config/
 /helloworld/obj/
 /helloworld/bin/
 /helloworld/alire/

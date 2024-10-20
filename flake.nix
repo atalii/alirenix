@@ -25,6 +25,13 @@
           index = self.packages.x86_64-linux.indexes.community;
         };
 
+        withdeps = import ./withdeps {
+          inherit pkgs;
+          lib = self.lib;
+          alire = self.packages.x86_64-linux.alire;
+          index = self.packages.x86_64-linux.indexes.community;
+        };
+
         alire = stdenv.mkDerivation (finalAttrs: {
           pname = "alire";
           version = "2.1.0-dev";
