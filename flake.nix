@@ -11,11 +11,10 @@
       let
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
       in with pkgs; {
-        indexes.community = self.lib.indexDerivation {
-            inherit pkgs;
-            idxSrc = alire-community-index;
-            pname = "community";
-            version = "stable-1.3.0";
+        indexes.community = pkgs.callPackage self.lib.indexDerivation {
+          idxSrc = alire-community-index;
+          pname = "community";
+          version = "stable-1.3.0";
         };
 
         helloworld = import ./helloworld {

@@ -63,8 +63,12 @@ rec {
     };
 
   # Create a derivation given an index name, source, and version.
-  indexDerivation = { pkgs, idxSrc, pname, version }: with pkgs;
-    stdenv.mkDerivation {
+  indexDerivation =
+    { stdenv
+    , idxSrc
+    , pname
+    , version
+    }: stdenv.mkDerivation {
       src = ./.;
 
       inherit pname version;
