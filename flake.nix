@@ -21,7 +21,7 @@
       let
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
       in with pkgs; {
-        indexes.community = pkgs.callPackage self.lib.indexDerivation {
+        community-index = pkgs.callPackage self.lib.indexDerivation {
           idxSrc = alire-community-index;
           pname = "community";
           version = "stable-1.3.0";
@@ -31,14 +31,14 @@
           inherit pkgs;
           lib = self.lib;
           alire = self.packages.x86_64-linux.alire;
-          index = self.packages.x86_64-linux.indexes.community;
+          index = self.packages.x86_64-linux.community-index;
         };
 
         withdeps = import ./withdeps {
           inherit pkgs;
           lib = self.lib;
           alire = self.packages.x86_64-linux.alire;
-          index = self.packages.x86_64-linux.indexes.community;
+          index = self.packages.x86_64-linux.community-index;
         };
 
         alire = pkgs.callPackage ./alire.nix {
