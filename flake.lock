@@ -19,7 +19,6 @@
     "alire-src": {
       "flake": false,
       "locked": {
-        "allRefs": true,
         "lastModified": 1727797151,
         "narHash": "sha256-46PwpF1/ZWJmGU/GPbTMuuFRLxazlfFWuFh4VioDNJs=",
         "ref": "nix",
@@ -30,7 +29,6 @@
         "url": "https://github.com/atalii/alire"
       },
       "original": {
-        "allRefs": true,
         "ref": "nix",
         "submodules": true,
         "type": "git",

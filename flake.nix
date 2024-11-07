@@ -11,7 +11,6 @@
       url = "https://github.com/atalii/alire";
       type = "git";
       ref = "nix";
-      allRefs = true;
       submodules = true;
       flake = false;
     };
