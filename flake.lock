@@ -19,16 +19,19 @@
     "alire-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1700561636,
-        "narHash": "sha256-hlewW5LBRoQUO4S48HS3bK/IcflTxtsZfS46LkGI0Ak=",
-        "ref": "refs/heads/master",
-        "rev": "98648092e2427867f4f18bd12f702f6e846f3f2e",
-        "revCount": 1801,
+        "allRefs": true,
+        "lastModified": 1727797151,
+        "narHash": "sha256-46PwpF1/ZWJmGU/GPbTMuuFRLxazlfFWuFh4VioDNJs=",
+        "ref": "nix",
+        "rev": "d18367d58f24cd11e316f50540cef30b5823bd6a",
+        "revCount": 1969,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/atalii/alire"
       },
       "original": {
+        "allRefs": true,
+        "ref": "nix",
         "submodules": true,
         "type": "git",
         "url": "https://github.com/atalii/alire"

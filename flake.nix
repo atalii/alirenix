@@ -3,13 +3,15 @@
     nixpkgs.url = "github:nixos/nixpkgs";
 
     alire-community-index = {
-      url = "github:alire-project/alire-index";
+      url = "github:alire-project/alire-index/";
       flake = false;
     };
 
     alire-src = {
       url = "https://github.com/atalii/alire";
       type = "git";
+      ref = "nix";
+      allRefs = true;
       submodules = true;
       flake = false;
     };
