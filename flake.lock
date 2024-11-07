@@ -16,6 +16,24 @@
         "type": "github"
       }
     },
+    "alire-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1700561636,
+        "narHash": "sha256-hlewW5LBRoQUO4S48HS3bK/IcflTxtsZfS46LkGI0Ak=",
+        "ref": "refs/heads/master",
+        "rev": "98648092e2427867f4f18bd12f702f6e846f3f2e",
+        "revCount": 1801,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/atalii/alire"
+      },
+      "original": {
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/atalii/alire"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1727816908,
@@ -34,6 +52,7 @@
     "root": {
       "inputs": {
         "alire-community-index": "alire-community-index",
+        "alire-src": "alire-src",
         "nixpkgs": "nixpkgs"
       }
     }

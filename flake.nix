@@ -1,12 +1,21 @@
 {
-  inputs.nixpkgs.url = "github:nixos/nixpkgs";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs";
 
-  inputs.alire-community-index = {
-    url = "github:alire-project/alire-index";
-    flake = false;
+    alire-community-index = {
+      url = "github:alire-project/alire-index";
+      flake = false;
+    };
+
+    alire-src = {
+      url = "https://github.com/atalii/alire";
+      type = "git";
+      submodules = true;
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, alire-community-index }: {
+  outputs = { self, nixpkgs, alire-community-index, alire-src }: {
     packages.x86_64-linux =
       let
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -31,40 +40,9 @@
           index = self.packages.x86_64-linux.indexes.community;
         };
 
-        alire = stdenv.mkDerivation (finalAttrs: {
-          pname = "alire";
-          version = "2.1.0-dev";
-
-          src = fetchFromGitHub {
-            owner = "atalii";
-            repo = "alire";
-            rev = "d18367d58f24cd11e316f50540cef30b5823bd6a";
-            hash = "sha256-46PwpF1/ZWJmGU/GPbTMuuFRLxazlfFWuFh4VioDNJs=";
-
-            fetchSubmodules = true;
-          };
-
-          nativeBuildInputs = [ gprbuild gnat ];
-
-          buildPhase = ''
-            runHook preBuild
-            patchShebangs dev/build.sh scripts/version-patcher.sh
-
-            export ALIRE_BUILD_JOBS="$NIX_BUILD_CORES"
-            ./dev/build.sh
-
-            runHook postBuild
-          '';
-
-          installPhase = ''
-            runHook preInstall
-
-            mkdir -p $out
-            cp -r ./bin $out
-
-            runHook postInstall
-          '';
-        });
+        alire = pkgs.callPackage ./alire.nix {
+          inherit alire-src;
+        };
       };
 
     lib = import ./lib;
