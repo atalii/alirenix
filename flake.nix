@@ -29,16 +29,12 @@
 
         helloworld = import ./helloworld {
           inherit pkgs;
-          lib = self.lib;
-          alire = self.packages.x86_64-linux.alire;
-          index = self.packages.x86_64-linux.community-index;
+          alirenix = self;
         };
 
         withdeps = import ./withdeps {
           inherit pkgs;
-          lib = self.lib;
-          alire = self.packages.x86_64-linux.alire;
-          index = self.packages.x86_64-linux.community-index;
+          alirenix = self;
         };
 
         alire = pkgs.callPackage ./alire.nix {

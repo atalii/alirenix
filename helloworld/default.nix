@@ -1,7 +1,9 @@
-{ pkgs, lib, alire, index }:
+{ alirenix, pkgs ? import <nixpkgs> {} }:
 
-(lib.buildAlireCrate { inherit pkgs; }) {
-  inherit alire index;
+(alirenix.lib.buildAlireCrate { inherit pkgs; }) {
+  alire = alirenix.packages.x86_64-linux.alire;
+  index = alirenix.packages.x86_64-linux.community-index;
+
   pname = "helloworld";
   version = "0.1.0";
   src = ./.;
