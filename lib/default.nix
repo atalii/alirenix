@@ -1,5 +1,12 @@
 rec {
-  fetchDeps = { pkgs }: { src, pname, version, index, alire }:
+  fetchDeps = { pkgs }:
+    { src
+    , pname
+    , version
+    , index
+    , alire
+    , depsHash
+    }:
     with pkgs; stdenv.mkDerivation {
       inherit src version;
       pname = "${pname}-deps";
@@ -27,14 +34,20 @@ rec {
 
       outputHashMode = "recursive";
       outputHashAlgo = null;
-      outputHash = "sha256-gpRL7/ma+cHVprf+Yl7+pIt5n0VtrPkvt3y2OFUaKD0=";
+      outputHash = depsHash;
   };
 
-  buildAlireCrate = { pkgs }: { src, pname, version, index, alire }:
-    with pkgs; stdenv.mkDerivation {
+  buildAlireCrate = { pkgs }:
+    { src
+    , pname
+    , version
+    , index
+    , alire
+    , depsHash ? null
+    }: with pkgs; stdenv.mkDerivation {
       inherit src pname version;
 
-      nativeBuildInputs = [ pkgs.gprbuild pkgs.gnat pkgs.git alire ];
+      nativeBuildInputs = [ gprbuild gnat git alire ];
 
       configurePhase = ''
         mkdir -p /tmp/.config/
@@ -47,12 +60,13 @@ rec {
         alr -vv toolchain --select gnat_external
       '';
 
-      buildPhase = ''
+      buildPhase = (if depsHash != null then ''
         mkdir -p /tmp/.local/share
-        cp -r ${(fetchDeps { inherit pkgs; }) { inherit src pname version index alire; }} \
+        cp -r ${(fetchDeps { inherit pkgs; })
+          { inherit src pname version index alire depsHash; }} \
           /tmp/.local/share/alire
         chmod +w -R /tmp/.local/share/alire
-
+      '' else "") + ''
         alr -n -v build
       '';
 

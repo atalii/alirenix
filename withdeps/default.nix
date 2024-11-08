@@ -7,4 +7,6 @@
   pname = "withdeps";
   version = "0.1.0";
   src = ./.;
+
+  depsHash = "sha256-gpRL7/ma+cHVprf+Yl7+pIt5n0VtrPkvt3y2OFUaKD0=";
 }
