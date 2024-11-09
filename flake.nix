@@ -37,6 +37,11 @@
           alirenix = self;
         };
 
+        withpinned = import ./withpinned {
+          inherit pkgs;
+          alirenix = self;
+        };
+
         alire = pkgs.callPackage ./alire.nix {
           inherit alire-src;
         };

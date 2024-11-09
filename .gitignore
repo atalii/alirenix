@@ -6,5 +6,9 @@ result
 /helloworld/obj/
 /helloworld/bin/
 /helloworld/alire/
-/helloworld/config/
+/withpinned/config/
+/withpinned/obj/
+/withpinned/bin/
+/withpinned/alire/
+/withpinned/config/
 *~
