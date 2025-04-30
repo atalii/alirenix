@@ -7,14 +7,6 @@
       url = "github:alire-project/alire-index/";
       flake = false;
     };
-
-    alire-src = {
-      url = "https://github.com/atalii/alire";
-      type = "git";
-      ref = "nix";
-      submodules = true;
-      flake = false;
-    };
   };
 
   outputs =
@@ -22,7 +14,6 @@
     , nixpkgs
     , flake-utils
     , alire-community-index
-    , alire-src
     }: (flake-utils.lib.eachDefaultSystem (system: {
       packages =
         let pkgs = nixpkgs.legacyPackages.${system};
@@ -48,9 +39,7 @@
             alirenix = self;
           };
 
-          alire = pkgs.callPackage ./alire.nix {
-            inherit alire-src;
-          };
+          alire = pkgs.alire;
         };
     }) // {
       lib = import ./lib;
