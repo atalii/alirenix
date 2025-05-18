@@ -45,6 +45,8 @@
         alire = pkgs.alire;
       });
 
+      formatter = define (pkgs: pkgs.nixfmt-rfc-style);
+
       lib = import ./lib;
     };
 }
