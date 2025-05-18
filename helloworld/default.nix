@@ -1,4 +1,7 @@
-{ alirenix, pkgs ? import <nixpkgs> {} }:
+{
+  alirenix,
+  pkgs ? import <nixpkgs> { },
+}:
 
 (alirenix.lib.buildAlireCrate { inherit pkgs; }) {
   alire = alirenix.packages.x86_64-linux.alire;

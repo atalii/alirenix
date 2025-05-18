@@ -1,7 +1,8 @@
-{ stdenv
-, gprbuild
-, gnat
-, alire-src
+{
+  stdenv,
+  gprbuild,
+  gnat,
+  alire-src,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -10,7 +11,10 @@ stdenv.mkDerivation (finalAttrs: {
 
   src = alire-src;
 
-  nativeBuildInputs = [ gprbuild gnat ];
+  nativeBuildInputs = [
+    gprbuild
+    gnat
+  ];
 
   buildPhase = ''
     runHook preBuild

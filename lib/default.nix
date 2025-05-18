@@ -1,17 +1,26 @@
 rec {
-  fetchDeps = { pkgs }:
-    { src
-    , pname
-    , version
-    , index
-    , alire
-    , depsHash
+  fetchDeps =
+    { pkgs }:
+    {
+      src,
+      pname,
+      version,
+      index,
+      alire,
+      depsHash,
     }:
-    with pkgs; stdenv.mkDerivation {
+    with pkgs;
+    stdenv.mkDerivation {
       inherit src version;
       pname = "${pname}-deps";
 
-      nativeBuildInputs = [ cacert gprbuild gnat git alire ];
+      nativeBuildInputs = [
+        cacert
+        gprbuild
+        gnat
+        git
+        alire
+      ];
 
       configurePhase = ''
         mkdir -p /tmp/.config/
@@ -50,23 +59,41 @@ rec {
       # Sometimes pinned git repos will have shebangs, which will then
       # be 'fixed', resulting in an illegal path in a FOD.
       dontPatchShebangs = true;
-  };
+    };
 
-  buildAlireCrate = { pkgs }:
-    { src
-    , pname
-    , version
-    , index
-    , alire
-    , depsHash ? null
+  buildAlireCrate =
+    { pkgs }:
+    {
+      src,
+      pname,
+      version,
+      index,
+      alire,
+      depsHash ? null,
     }:
     let
       deps = (fetchDeps { inherit pkgs; }) {
-        inherit src pname version index alire depsHash;
-      }; in (with pkgs; stdenv.mkDerivation {
+        inherit
+          src
+          pname
+          version
+          index
+          alire
+          depsHash
+          ;
+      };
+    in
+    (
+      with pkgs;
+      stdenv.mkDerivation {
         inherit src pname version;
 
-        nativeBuildInputs = [ gprbuild gnat git alire ];
+        nativeBuildInputs = [
+          gprbuild
+          gnat
+          git
+          alire
+        ];
 
         configurePhase = ''
           mkdir -p /tmp/.config/
@@ -79,33 +106,43 @@ rec {
           alr -vv toolchain --select gnat_external
         '';
 
-        buildPhase = (if depsHash != null then ''
-          mkdir -p /tmp/.local/share
+        buildPhase =
+          (
+            if depsHash != null then
+              ''
+                mkdir -p /tmp/.local/share
 
-          cp -r ${deps}/global-cache /tmp/.local/share/alire
-          chmod +w -R /tmp/.local/share/alire
+                cp -r ${deps}/global-cache /tmp/.local/share/alire
+                chmod +w -R /tmp/.local/share/alire
 
-          rm -rf ./alire/cache
+                rm -rf ./alire/cache
 
-          cp -r ${deps}/local-cache ./alire/cache
-          chmod +w -R ./alire/cache
-        '' else "") + ''
-          alr -n -v build
-        '';
+                cp -r ${deps}/local-cache ./alire/cache
+                chmod +w -R ./alire/cache
+              ''
+            else
+              ""
+          )
+          + ''
+            alr -n -v build
+          '';
 
         installPhase = ''
           mkdir -p $out
           cp -r bin $out/bin
         '';
-      });
+      }
+    );
 
   # Create a derivation given an index name, source, and version.
   indexDerivation =
-    { stdenv
-    , idxSrc
-    , pname
-    , version
-    }: stdenv.mkDerivation {
+    {
+      stdenv,
+      idxSrc,
+      pname,
+      version,
+    }:
+    stdenv.mkDerivation {
       src = ./.;
 
       inherit pname version;
