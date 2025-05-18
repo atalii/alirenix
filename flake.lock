@@ -3,11 +3,11 @@
     "alire-community-index": {
       "flake": false,
       "locked": {
-        "lastModified": 1745829006,
-        "narHash": "sha256-B8+LzwZsl5xf6TAcXHYvlovsQrILpdlyJt0M3fUiCok=",
+        "lastModified": 1747393402,
+        "narHash": "sha256-MV3qc12g2r9ntV5Fb3IEzK2tbkTOW7yVqq7vm6uEsrY=",
         "owner": "alire-project",
         "repo": "alire-index",
-        "rev": "3eded0f0c9d6cf734e455f624fad0b50f43d7333",
+        "rev": "f2e64c68f6f0e8844bb92b1c2d3f58d71ed65e9c",
         "type": "github"
       },
       "original": {
@@ -36,11 +36,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1745972144,
-        "narHash": "sha256-jkY6fJZ9oYUzEMeOiTa4VfEZ7/UOGDUZcqweGujs8u4=",
+        "lastModified": 1747587122,
+        "narHash": "sha256-8A/zJ3vqqvzgoeXYaNqBtC7tjulWZuYy9IrDehjvUCc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "ac95911865b5823bc122be75177b2b187dc65ee4",
+        "rev": "697aab626a857591d5361d9abf8ce9f4946ffeec",
         "type": "github"
       },
       "original": {
