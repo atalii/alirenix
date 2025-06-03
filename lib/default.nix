@@ -20,6 +20,8 @@ rec {
         git
         curl
         cacert
+        zip
+        unzip
         alire
       ];
 
