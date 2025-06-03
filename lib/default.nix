@@ -15,10 +15,11 @@ rec {
       pname = "${pname}-deps";
 
       nativeBuildInputs = [
-        cacert
         gprbuild
         gnat
         git
+        curl
+        cacert
         alire
       ];
 
