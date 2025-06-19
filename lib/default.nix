@@ -8,21 +8,24 @@ rec {
       index,
       alire,
       depsHash,
+
+      gnat ? pkgs.gnat,
+      gprbuild ? pkgs.gprbuild,
     }:
-    with pkgs;
-    stdenv.mkDerivation {
+    pkgs.stdenv.mkDerivation {
       inherit src version;
       pname = "${pname}-deps";
 
       nativeBuildInputs = [
+        pkgs.git
+        pkgs.curl
+        pkgs.cacert
+        pkgs.zip
+        pkgs.unzip
+
+        alire
         gprbuild
         gnat
-        git
-        curl
-        cacert
-        zip
-        unzip
-        alire
       ];
 
       configurePhase = ''
@@ -73,6 +76,9 @@ rec {
       index,
       alire,
       depsHash ? null,
+
+      gnat ? pkgs.gnat,
+      gprbuild ? pkgs.gprbuild,
     }:
     let
       deps = (fetchDeps { inherit pkgs; }) {
@@ -86,56 +92,54 @@ rec {
           ;
       };
     in
-    (
-      with pkgs;
-      stdenv.mkDerivation {
-        inherit src pname version;
+    (pkgs.stdenv.mkDerivation {
+      inherit src pname version;
 
-        nativeBuildInputs = [
-          gprbuild
-          gnat
-          git
-          alire
-        ];
+      nativeBuildInputs = [
+        gprbuild
+        gnat
+        alire
 
-        configurePhase = ''
-          mkdir -p /tmp/.config/
+        pkgs.git
+      ];
 
-          cp -r ${index} /tmp/.config/alire/
-          chmod +w -R /tmp/.config # why isn't it created writable??
-          alr settings --set index.auto_update 0
-          alr settings --set toolcahin.assisstant false
-          alr settings --set warning.old_index false
-          alr -vv toolchain --select gnat_external
+      configurePhase = ''
+        mkdir -p /tmp/.config/
+
+        cp -r ${index} /tmp/.config/alire/
+        chmod +w -R /tmp/.config # why isn't it created writable??
+        alr settings --set index.auto_update 0
+        alr settings --set toolcahin.assisstant false
+        alr settings --set warning.old_index false
+        alr -vv toolchain --select gnat_external
+      '';
+
+      buildPhase =
+        (
+          if depsHash != null then
+            ''
+              mkdir -p /tmp/.local/share
+
+              cp -r ${deps}/global-cache /tmp/.local/share/alire
+              chmod +w -R /tmp/.local/share/alire
+
+              rm -rf ./alire/cache
+
+              cp -r ${deps}/local-cache ./alire/cache
+              chmod +w -R ./alire/cache
+            ''
+          else
+            ""
+        )
+        + ''
+          alr -n -v build
         '';
 
-        buildPhase =
-          (
-            if depsHash != null then
-              ''
-                mkdir -p /tmp/.local/share
-
-                cp -r ${deps}/global-cache /tmp/.local/share/alire
-                chmod +w -R /tmp/.local/share/alire
-
-                rm -rf ./alire/cache
-
-                cp -r ${deps}/local-cache ./alire/cache
-                chmod +w -R ./alire/cache
-              ''
-            else
-              ""
-          )
-          + ''
-            alr -n -v build
-          '';
-
-        installPhase = ''
-          mkdir -p $out
-          cp -r bin $out/bin
-        '';
-      }
-    );
+      installPhase = ''
+        mkdir -p $out
+        cp -r bin $out/bin
+      '';
+    });
 
   # Create a derivation given an index name, source, and version.
   indexDerivation =

@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/release-25.05";
 
     alire-community-index = {
       url = "github:alire-project/alire-index/";
@@ -38,6 +38,11 @@
         };
 
         withpinned = import ./withpinned {
+          inherit pkgs;
+          alirenix = self;
+        };
+
+        withgnat = import ./withgnat {
           inherit pkgs;
           alirenix = self;
         };

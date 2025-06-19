@@ -3,11 +3,11 @@
     "alire-community-index": {
       "flake": false,
       "locked": {
-        "lastModified": 1747393402,
-        "narHash": "sha256-MV3qc12g2r9ntV5Fb3IEzK2tbkTOW7yVqq7vm6uEsrY=",
+        "lastModified": 1749722259,
+        "narHash": "sha256-UW492D5b5c0LYP7m2uxYKtkHIrqDCdnB5seo6ZVW8BU=",
         "owner": "alire-project",
         "repo": "alire-index",
-        "rev": "f2e64c68f6f0e8844bb92b1c2d3f58d71ed65e9c",
+        "rev": "c8f57b57d7d2833c1e499a35f060faf7f44e3530",
         "type": "github"
       },
       "original": {
@@ -18,15 +18,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1747587122,
-        "narHash": "sha256-8A/zJ3vqqvzgoeXYaNqBtC7tjulWZuYy9IrDehjvUCc=",
+        "lastModified": 1750357780,
+        "narHash": "sha256-vQs+gk0RkSJdwtfed94L4YnwMOygAKzUhb9IPGVI00w=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "697aab626a857591d5361d9abf8ce9f4946ffeec",
+        "rev": "b530547768e52213fd7a2c8c6d46c682945f390b",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
+        "ref": "release-25.05",
         "repo": "nixpkgs",
         "type": "github"
       }
