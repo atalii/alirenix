@@ -11,5 +11,5 @@
   version = "0.1.0";
   src = ./.;
 
-  depsHash = "sha256-G37kOVwFan+fHv+kDEx+MCsX/53VVE5DBY/jUvDCVhY=";
+  depsHash = "sha256-cy07ZYfBi7O3adDqgMoUaEP9g1eNeoHiQQA75kOdS08=";
 }

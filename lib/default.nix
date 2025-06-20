@@ -45,7 +45,7 @@ rec {
         # git hooks created by git clone, when git is installed via
         # nix, contain a shebang pointing to the nix store. these
         # paths are illegal in FODs. remove them.
-        rm -rf alire/cache/pins/*/.git/hooks
+        rm -rf alire/cache/pins/*/.git
       '';
 
       installPhase = ''
