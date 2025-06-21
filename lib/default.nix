@@ -1,3 +1,16 @@
+let
+  mkConfigurePhase = indexDrv: ''
+    mkdir -p /tmp/.config/
+
+    cp -r ${indexDrv} /tmp/.config/alire/
+    chmod +w -R /tmp/.config
+
+    alr settings --set index.auto_update 0
+    alr settings --set toolcahin.assisstant false
+    alr settings --set warning.old_index false
+    alr -vv toolchain --select gnat_external
+  '';
+in
 rec {
   fetchDeps =
     { pkgs }:
@@ -28,16 +41,7 @@ rec {
         gnat
       ];
 
-      configurePhase = ''
-        mkdir -p /tmp/.config/
-
-        cp -r ${index} /tmp/.config/alire/
-        chmod +w -R /tmp/.config # why isn't it created writable??
-        alr settings --set index.auto_update 0
-        alr settings --set toolcahin.assisstant false
-        alr settings --set warning.old_index false
-        alr -vv toolchain --select gnat_external
-      '';
+      configurePhase = mkConfigurePhase index;
 
       buildPhase = ''
         alr build --stop-after=pre-build
@@ -103,16 +107,7 @@ rec {
         pkgs.git
       ];
 
-      configurePhase = ''
-        mkdir -p /tmp/.config/
-
-        cp -r ${index} /tmp/.config/alire/
-        chmod +w -R /tmp/.config # why isn't it created writable??
-        alr settings --set index.auto_update 0
-        alr settings --set toolcahin.assisstant false
-        alr settings --set warning.old_index false
-        alr -vv toolchain --select gnat_external
-      '';
+      configurePhase = mkConfigurePhase index;
 
       buildPhase =
         (
