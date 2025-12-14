@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/release-25.11";
 
     alire-community-index = {
       url = "github:alire-project/alire-index/";
